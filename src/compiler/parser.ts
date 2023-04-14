@@ -2772,7 +2772,8 @@ namespace Parser {
             || token() === SyntaxKind.AtToken
             || (token() === SyntaxKind.AbstractKeyword && lookAhead(nextTokenIsClassKeywordOnSameLine))
             || (token() === SyntaxKind.AsyncKeyword && lookAhead(nextTokenIsFunctionKeywordOnSameLine))
-            || (token() === SyntaxKind.EndpointKeyword && lookAhead(nextTokenIsFunctionKeywordOnSameLine));
+            || (token() === SyntaxKind.EndpointKeyword && lookAhead(nextTokenIsFunctionKeywordOnSameLine))
+            || (token() === SyntaxKind.ProcessKeyword && lookAhead(nextTokenIsFunctionKeywordOnSameLine));
 
     }
 
@@ -6469,8 +6470,9 @@ namespace Parser {
             case SyntaxKind.OpenBracketToken:
                 return parseArrayLiteralExpression();
             case SyntaxKind.OpenBraceToken:
-                return parseObjectLiteralExpression();                    
-            case SyntaxKind.EndpointKeyword:
+                return parseObjectLiteralExpression();        
+            case SyntaxKind.EndpointKeyword:    
+            case SyntaxKind.ProcessKeyword:
             case SyntaxKind.AsyncKeyword:
                 // Async arrow functions are parsed earlier in parseAssignmentExpressionOrHigher.
                 // If we encounter `async [no LineTerminator here] function` then this is an async
@@ -7011,6 +7013,7 @@ namespace Parser {
                 case SyntaxKind.LetKeyword:
                 case SyntaxKind.ConstKeyword:
                 case SyntaxKind.EndpointKeyword:
+                case SyntaxKind.ProcessKeyword:
                 case SyntaxKind.FunctionKeyword:
                 case SyntaxKind.ClassKeyword:
                 case SyntaxKind.EnumKeyword:
@@ -7129,6 +7132,7 @@ namespace Parser {
 
             case SyntaxKind.AsyncKeyword:
             case SyntaxKind.EndpointKeyword:
+            case SyntaxKind.ProcessKeyword:
             case SyntaxKind.DeclareKeyword:
             case SyntaxKind.InterfaceKeyword:
             case SyntaxKind.ModuleKeyword:
@@ -7213,6 +7217,7 @@ namespace Parser {
                 return parseDeclaration();
             case SyntaxKind.AsyncKeyword:
             case SyntaxKind.EndpointKeyword:
+            case SyntaxKind.ProcessKeyword:
             case SyntaxKind.InterfaceKeyword:
             case SyntaxKind.TypeKeyword:
             case SyntaxKind.ModuleKeyword:

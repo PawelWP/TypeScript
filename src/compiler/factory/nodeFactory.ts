@@ -1320,6 +1320,7 @@ export function createNodeFactory(flags: NodeFactoryFlags, baseFactory: BaseNode
                 break;
             
             case SyntaxKind.EndpointKeyword:
+            case SyntaxKind.ProcessKeyword:
             case SyntaxKind.PublicKeyword:
             case SyntaxKind.PrivateKeyword:
             case SyntaxKind.ProtectedKeyword:
@@ -1420,6 +1421,7 @@ export function createNodeFactory(flags: NodeFactoryFlags, baseFactory: BaseNode
         if (flags & ModifierFlags.Accessor) result.push(createModifier(SyntaxKind.AccessorKeyword));
         if (flags & ModifierFlags.Async) result.push(createModifier(SyntaxKind.AsyncKeyword));
         if (flags & ModifierFlags.Endpoint) result.push(createModifier(SyntaxKind.EndpointKeyword));
+        if (flags & ModifierFlags.Process) result.push(createModifier(SyntaxKind.ProcessKeyword));
         if (flags & ModifierFlags.In) result.push(createModifier(SyntaxKind.InKeyword));
         if (flags & ModifierFlags.Out) result.push(createModifier(SyntaxKind.OutKeyword));
         return result.length ? result : undefined;

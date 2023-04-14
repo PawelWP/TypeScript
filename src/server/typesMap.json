@@ -61,6 +61,7 @@
         "angular-wizard": "angular-wizard",
         "async": "async",
         "endpoint": "endpoint",
+        "process": "process",
         "atmosphere": "atmosphere",
         "aws-sdk": "aws-sdk",
         "aws-sdk-js": "aws-sdk",

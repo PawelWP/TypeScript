@@ -190,6 +190,7 @@ export const enum SyntaxKind {
     AnyKeyword,
     AsyncKeyword,
     EndpointKeyword,
+    ProcessKeyword,
     AwaitKeyword,
     BooleanKeyword,
     ConstructorKeyword,
@@ -592,6 +593,7 @@ export type KeywordSyntaxKind =
     | SyntaxKind.AssertKeyword
     | SyntaxKind.AsyncKeyword
     | SyntaxKind.EndpointKeyword
+    | SyntaxKind.ProcessKeyword
     | SyntaxKind.AwaitKeyword
     | SyntaxKind.BigIntKeyword
     | SyntaxKind.BooleanKeyword
@@ -674,6 +676,7 @@ export type ModifierSyntaxKind =
     | SyntaxKind.AccessorKeyword
     | SyntaxKind.AsyncKeyword
     | SyntaxKind.EndpointKeyword
+    | SyntaxKind.ProcessKeyword
     | SyntaxKind.ConstKeyword
     | SyntaxKind.DeclareKeyword
     | SyntaxKind.DefaultKeyword
@@ -864,6 +867,7 @@ export const enum ModifierFlags {
     Abstract =           1 << 8,  // Class/Method/ConstructSignature
     Async =              1 << 9,  // Property/Method/Function
     Endpoint =           1 << 18, 
+    Process =           1 << 19, 
     Default =            1 << 10, // Function/Class (export default declaration)
     Const =              1 << 11, // Const enum
     HasComputedJSDocModifiers = 1 << 12, // Indicates the computed modifier flags include modifiers from JSDoc.
@@ -882,7 +886,7 @@ export const enum ModifierFlags {
 
     TypeScriptModifier = Ambient | Public | Private | Protected | Readonly | Abstract | Const | Override | In | Out,
     ExportDefault = Export | Default,
-    All = Export | Ambient | Public | Private | Protected | Static | Readonly | Abstract | Accessor | Async | Endpoint | Default | Const | Deprecated | Override | In | Out | Decorator,
+    All = Export | Ambient | Public | Private | Protected | Static | Readonly | Abstract | Accessor | Async | Endpoint | Process | Default | Const | Deprecated | Override | In | Out | Decorator,
     Modifier = All & ~Decorator
 }
 
@@ -1614,6 +1618,7 @@ export type AbstractKeyword = ModifierToken<SyntaxKind.AbstractKeyword>;
 export type AccessorKeyword = ModifierToken<SyntaxKind.AccessorKeyword>;
 export type AsyncKeyword = ModifierToken<SyntaxKind.AsyncKeyword>;
 export type EndpointKeyword = ModifierToken<SyntaxKind.EndpointKeyword>;
+export type ProcessKeyword = ModifierToken<SyntaxKind.ProcessKeyword>;
 export type ConstKeyword = ModifierToken<SyntaxKind.ConstKeyword>;
 export type DeclareKeyword = ModifierToken<SyntaxKind.DeclareKeyword>;
 export type DefaultKeyword = ModifierToken<SyntaxKind.DefaultKeyword>;
@@ -1632,6 +1637,7 @@ export type Modifier =
     | AccessorKeyword
     | AsyncKeyword
     | EndpointKeyword
+    | ProcessKeyword
     | ConstKeyword
     | DeclareKeyword
     | DefaultKeyword

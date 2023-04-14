@@ -12,6 +12,7 @@ import {
     AsteriskToken,
     AsyncKeyword,
     EndpointKeyword,
+    ProcessKeyword,
     AwaitExpression,
     AwaitKeyword,
     BigIntLiteral,
@@ -345,6 +346,10 @@ export function isEndpointModifier(node: Node): node is EndpointKeyword {
     return node.kind === SyntaxKind.EndpointKeyword;
 }
 
+/** @internal */
+export function isProcessModifier(node: Node): node is ProcessKeyword {
+    return node.kind === SyntaxKind.ProcessKeyword;
+}
 export function isAssertsKeyword(node: Node): node is AssertsKeyword {
     return node.kind === SyntaxKind.AssertsKeyword;
 }

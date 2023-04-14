@@ -4890,7 +4890,19 @@ export function isEndpointFunction(node: Node): boolean {
     }
     return false;
 }
-
+/** @internal */
+export function isProcessFunction(node: Node): boolean {
+    switch (node.kind) {
+        case SyntaxKind.FunctionDeclaration:
+        case SyntaxKind.FunctionExpression:
+        case SyntaxKind.ArrowFunction:
+        case SyntaxKind.MethodDeclaration:
+            return (node as FunctionLikeDeclaration).body !== undefined
+                && (node as FunctionLikeDeclaration).asteriskToken === undefined
+                && hasSyntacticModifier(node, ModifierFlags.Process);
+    }
+    return false;
+}
 /** @internal */
 export function isStringOrNumericLiteralLike(node: Node): node is StringLiteralLike | NumericLiteral {
     return isStringLiteralLike(node) || isNumericLiteral(node);
@@ -6851,6 +6863,7 @@ export function modifierToFlag(token: SyntaxKind): ModifierFlags {
         case SyntaxKind.DefaultKeyword: return ModifierFlags.Default;
         case SyntaxKind.AsyncKeyword: return ModifierFlags.Async;
         case SyntaxKind.EndpointKeyword: return ModifierFlags.Endpoint;
+        case SyntaxKind.ProcessKeyword: return ModifierFlags.Process;
         case SyntaxKind.ReadonlyKeyword: return ModifierFlags.Readonly;
         case SyntaxKind.OverrideKeyword: return ModifierFlags.Override;
         case SyntaxKind.InKeyword: return ModifierFlags.In;
