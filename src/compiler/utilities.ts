@@ -4877,6 +4877,19 @@ export function isAsyncFunction(node: Node): boolean {
     }
     return false;
 }
+/** @internal */
+export function isEndpointFunction(node: Node): boolean {
+    switch (node.kind) {
+        case SyntaxKind.FunctionDeclaration:
+        case SyntaxKind.FunctionExpression:
+        case SyntaxKind.ArrowFunction:
+        case SyntaxKind.MethodDeclaration:
+            return (node as FunctionLikeDeclaration).body !== undefined
+                && (node as FunctionLikeDeclaration).asteriskToken === undefined
+                && hasSyntacticModifier(node, ModifierFlags.Endpoint);
+    }
+    return false;
+}
 
 /** @internal */
 export function isStringOrNumericLiteralLike(node: Node): node is StringLiteralLike | NumericLiteral {
@@ -6837,6 +6850,7 @@ export function modifierToFlag(token: SyntaxKind): ModifierFlags {
         case SyntaxKind.ConstKeyword: return ModifierFlags.Const;
         case SyntaxKind.DefaultKeyword: return ModifierFlags.Default;
         case SyntaxKind.AsyncKeyword: return ModifierFlags.Async;
+        case SyntaxKind.EndpointKeyword: return ModifierFlags.Endpoint;
         case SyntaxKind.ReadonlyKeyword: return ModifierFlags.Readonly;
         case SyntaxKind.OverrideKeyword: return ModifierFlags.Override;
         case SyntaxKind.InKeyword: return ModifierFlags.In;

@@ -11,6 +11,7 @@ import {
     AssertsKeyword,
     AsteriskToken,
     AsyncKeyword,
+    EndpointKeyword,
     AwaitExpression,
     AwaitKeyword,
     BigIntLiteral,
@@ -337,6 +338,11 @@ export function isDefaultModifier(node: Node): node is DefaultKeyword {
 /** @internal */
 export function isAsyncModifier(node: Node): node is AsyncKeyword {
     return node.kind === SyntaxKind.AsyncKeyword;
+}
+
+/** @internal */
+export function isEndpointModifier(node: Node): node is EndpointKeyword {
+    return node.kind === SyntaxKind.EndpointKeyword;
 }
 
 export function isAssertsKeyword(node: Node): node is AssertsKeyword {

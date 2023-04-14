@@ -60,6 +60,7 @@
         "angular-ui-tree": "angular-ui-tree",
         "angular-wizard": "angular-wizard",
         "async": "async",
+        "endpoint": "endpoint",
         "atmosphere": "atmosphere",
         "aws-sdk": "aws-sdk",
         "aws-sdk-js": "aws-sdk",

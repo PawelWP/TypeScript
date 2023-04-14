@@ -4701,6 +4701,7 @@ function isClassMemberCompletionKeyword(kind: SyntaxKind) {
 
 function isFunctionLikeBodyKeyword(kind: SyntaxKind) {
     return kind === SyntaxKind.AsyncKeyword
+        || kind === SyntaxKind.EndpointKeyword
         || kind === SyntaxKind.AwaitKeyword
         || kind === SyntaxKind.AsKeyword
         || kind === SyntaxKind.SatisfiesKeyword

@@ -200,6 +200,7 @@ export const textToKeywordObj: MapLike<KeywordSyntaxKind> = {
     with: SyntaxKind.WithKeyword,
     yield: SyntaxKind.YieldKeyword,
     async: SyntaxKind.AsyncKeyword,
+    endpoint: SyntaxKind.EndpointKeyword,
     await: SyntaxKind.AwaitKeyword,
     of: SyntaxKind.OfKeyword,
 };

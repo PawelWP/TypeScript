@@ -1318,7 +1318,8 @@ export function createNodeFactory(flags: NodeFactoryFlags, baseFactory: BaseNode
                     TransformFlags.ContainsES2017 |
                     TransformFlags.ContainsES2018;
                 break;
-
+            
+            case SyntaxKind.EndpointKeyword:
             case SyntaxKind.PublicKeyword:
             case SyntaxKind.PrivateKeyword:
             case SyntaxKind.ProtectedKeyword:
@@ -1418,6 +1419,7 @@ export function createNodeFactory(flags: NodeFactoryFlags, baseFactory: BaseNode
         if (flags & ModifierFlags.Readonly) result.push(createModifier(SyntaxKind.ReadonlyKeyword));
         if (flags & ModifierFlags.Accessor) result.push(createModifier(SyntaxKind.AccessorKeyword));
         if (flags & ModifierFlags.Async) result.push(createModifier(SyntaxKind.AsyncKeyword));
+        if (flags & ModifierFlags.Endpoint) result.push(createModifier(SyntaxKind.EndpointKeyword));
         if (flags & ModifierFlags.In) result.push(createModifier(SyntaxKind.InKeyword));
         if (flags & ModifierFlags.Out) result.push(createModifier(SyntaxKind.OutKeyword));
         return result.length ? result : undefined;

@@ -132,6 +132,7 @@ import {
     isArray,
     isAssignmentOperator,
     isAsyncModifier,
+    // isEndpointModifier,
     isClassMemberModifier,
     isExportAssignment,
     isExportDeclaration,
@@ -2770,7 +2771,9 @@ namespace Parser {
             || token() === SyntaxKind.InterfaceKeyword
             || token() === SyntaxKind.AtToken
             || (token() === SyntaxKind.AbstractKeyword && lookAhead(nextTokenIsClassKeywordOnSameLine))
-            || (token() === SyntaxKind.AsyncKeyword && lookAhead(nextTokenIsFunctionKeywordOnSameLine));
+            || (token() === SyntaxKind.AsyncKeyword && lookAhead(nextTokenIsFunctionKeywordOnSameLine))
+            || (token() === SyntaxKind.EndpointKeyword && lookAhead(nextTokenIsFunctionKeywordOnSameLine));
+
     }
 
     // True if positioned at the start of a list element
@@ -6466,7 +6469,8 @@ namespace Parser {
             case SyntaxKind.OpenBracketToken:
                 return parseArrayLiteralExpression();
             case SyntaxKind.OpenBraceToken:
-                return parseObjectLiteralExpression();
+                return parseObjectLiteralExpression();                    
+            case SyntaxKind.EndpointKeyword:
             case SyntaxKind.AsyncKeyword:
                 // Async arrow functions are parsed earlier in parseAssignmentExpressionOrHigher.
                 // If we encounter `async [no LineTerminator here] function` then this is an async
@@ -6617,6 +6621,7 @@ namespace Parser {
         const asteriskToken = parseOptionalToken(SyntaxKind.AsteriskToken);
         const isGenerator = asteriskToken ? SignatureFlags.Yield : SignatureFlags.None;
         const isAsync = some(modifiers, isAsyncModifier) ? SignatureFlags.Await : SignatureFlags.None;
+        // const isEndpoint = some(modifiers, isEndpointModifier) ? SignatureFlags.Await : SignatureFlags.None;
         const name = isGenerator && isAsync ? doInYieldAndAwaitContext(parseOptionalBindingIdentifier) :
             isGenerator ? doInYieldContext(parseOptionalBindingIdentifier) :
             isAsync ? doInAwaitContext(parseOptionalBindingIdentifier) :
@@ -7005,6 +7010,7 @@ namespace Parser {
                 case SyntaxKind.VarKeyword:
                 case SyntaxKind.LetKeyword:
                 case SyntaxKind.ConstKeyword:
+                case SyntaxKind.EndpointKeyword:
                 case SyntaxKind.FunctionKeyword:
                 case SyntaxKind.ClassKeyword:
                 case SyntaxKind.EnumKeyword:
@@ -7122,6 +7128,7 @@ namespace Parser {
                 return isStartOfDeclaration();
 
             case SyntaxKind.AsyncKeyword:
+            case SyntaxKind.EndpointKeyword:
             case SyntaxKind.DeclareKeyword:
             case SyntaxKind.InterfaceKeyword:
             case SyntaxKind.ModuleKeyword:
@@ -7205,6 +7212,7 @@ namespace Parser {
             case SyntaxKind.AtToken:
                 return parseDeclaration();
             case SyntaxKind.AsyncKeyword:
+            case SyntaxKind.EndpointKeyword:
             case SyntaxKind.InterfaceKeyword:
             case SyntaxKind.TypeKeyword:
             case SyntaxKind.ModuleKeyword:

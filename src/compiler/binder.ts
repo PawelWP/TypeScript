@@ -126,6 +126,7 @@ import {
     isAssignmentOperator,
     isAssignmentTarget,
     isAsyncFunction,
+    // isEndpointFunction,
     isAutoAccessorPropertyDeclaration,
     isBinaryExpression,
     isBindableObjectDefinePropertyCall,
